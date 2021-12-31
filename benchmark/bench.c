@@ -15,7 +15,19 @@ int main(int argc, char const *argv[])
     int nums[n];
 
     struct timespec start, end;
-    const int sort_len = 2;
+    divide_f *divides[] = {
+        fast_slow_divide,
+        divide_to_single,
+        divide_to_sorted
+    };
+    // merge_f *merges[] = {
+    //     head_tail_merge,
+    //     interval_merge,
+    //     divide_and_conquer,
+    // };
+
+    const int sort_len = sizeof(divides) / sizeof(divide_f *);
+    // const int sort_len = sizeof(merges) / sizeof(merge_f *);
     time_t measures[epochs][sort_len];
     node_t *lists[sort_len];
 
@@ -33,20 +45,15 @@ int main(int argc, char const *argv[])
             // lists[j] = reverse(lists[j]);
         }
 
-        clock_gettime(CLOCK_MONOTONIC, &start);
-        merge_sort_iter(&lists[0], divide_to_sorted, divide_and_conquer);
-        clock_gettime(CLOCK_MONOTONIC, &end);
-        assert(list_is_ordered(lists[0]));
-        measures[i][0] = diff(start, end);
-        
-        clock_gettime(CLOCK_MONOTONIC, &start);
-        mergesort(&lists[1]);
-        clock_gettime(CLOCK_MONOTONIC, &end);
-        assert(list_is_ordered(lists[1]));
-        measures[i][1] = diff(start, end);
-
-
-
+        for (size_t j = 0; j < sort_len; j++)
+        {
+            clock_gettime(CLOCK_MONOTONIC, &start);
+            merge_sort_iter(&lists[j], divides[j], interval_merge);
+            // merge_sort_iter(&lists[j], divide_to_single, merges[j]);
+            clock_gettime(CLOCK_MONOTONIC, &end);
+            assert(list_is_ordered(lists[j]));
+            measures[i][j] = diff(start, end);
+        }
         for (size_t j = 0; j < sort_len; j++)
             list_free(&lists[j]);
 

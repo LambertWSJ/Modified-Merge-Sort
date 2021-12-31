@@ -10,12 +10,11 @@ typedef struct __node
     struct __node *next;
 } node_t;
 
-/*
-merge two lists
-free list
-display list
 
-*/
+void list_add_node_t(node_t **list, node_t *node_t);
+
+void list_concat(node_t **left, node_t *right);
+
 node_t *mergeTwoLists(node_t *left, node_t *right);
 
 node_t* build_list_from(int *nums, size_t len);
@@ -30,5 +29,6 @@ void list_free(node_t **list);
 
 int get_list_length(node_t *list);
 
+void shuffle_list(node_t **list);
 
 #endif

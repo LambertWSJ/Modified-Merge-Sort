@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "list.h": "c"
+        "list.h": "c",
+        "divide.h": "c",
+        "merge.h": "c",
+        "merge_sort.h": "c"
     }
 }

@@ -1,6 +1,19 @@
 #include "list.h"
 
 
+void list_add_node_t(node_t **list, node_t *node_t)
+{
+    node_t->next = *list;
+    *list = node_t;
+}
+
+void list_concat(node_t **left, node_t *right)
+{
+    while (*left)
+        left = &((*left)->next);
+    *left = right;
+}
+
 node_t *mergeTwoLists(node_t *left, node_t *right)
 {
     node_t *result = NULL;
@@ -97,3 +110,27 @@ int get_list_length(node_t *list)
     return n;
 }
 
+void shuffle_list(node_t **list) {
+    const int n = get_list_length(*list);
+    node_t *lists[n], *node, *next = NULL;
+    int i = 0;
+    for(node = *list; node; node = next) {
+        lists[i++] = node;
+        next = node->next;
+        node->next = NULL;
+    }
+    
+    for(i = n - 1; i >= 0; i--) {
+        int j = rand() % n;
+        node = lists[i];
+        lists[i] = lists[j];
+        lists[j] = node;
+    }
+    node_t **indir = list;
+    for(i = 0; i < n - 1; i++) {
+        *indir = lists[i];
+        next = lists[i + 1];
+        (*indir)->next = next;
+        indir = &(*indir)->next;
+    }
+}

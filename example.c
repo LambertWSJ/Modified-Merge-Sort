@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
     size_t len = sizeof(nums) / sizeof(int);
 
     divide_f* divides[] = {fast_slow_divide, divide_to_single, divide_to_sorted};
-    merge_f* merges[] = {head_tail_merge, interval_merge};
+    merge_f* merges[] = {head_tail_merge, interval_merge, divide_and_conquer};
     int div_len = sizeof(divides) / sizeof(divide_f*);
     int mer_len = sizeof(merges) / sizeof(merge_f*);
 
@@ -29,13 +29,5 @@ int main(int argc, char const *argv[])
             list_free(&list);
         }
     }
-
-    // all combinations
-    // merge_sort_iter(&list, fast_slow_divide, head_tail_merge);
-    // merge_sort_iter(&list, fast_slow_divide, interval_merge);
-    // merge_sort_iter(&list, divide_to_single, head_tail_merge);
-    // merge_sort_iter(&list, divide_to_single, interval_merge);
-    // merge_sort_iter(&list, divide_to_sorted, head_tail_merge);
-    // merge_sort_iter(&list, divide_to_sorted, interval_merge);
     return 0;
 }

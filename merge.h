@@ -8,4 +8,5 @@ void head_tail_merge(node_t **list, node_t *lists[], size_t listsSize);
 
 void interval_merge(node_t **list, node_t *lists[], size_t listsSize);
 
+void divide_and_conquer(node_t **list, node_t *lists[], size_t listsSize);
 #endif

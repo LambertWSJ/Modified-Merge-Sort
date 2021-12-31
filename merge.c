@@ -19,3 +19,20 @@ void interval_merge(node_t **list, node_t *lists[], size_t listsSize)
 
     *list = lists[0];
 }
+
+static node_t* merge_lists(node_t **lists, int low, int high) {
+    if(low > high)
+        return NULL;
+    if(low == high)
+        return lists[low];
+
+    int mid = (low + high) / 2;
+    node_t *left = merge_lists(lists, low, mid);
+    node_t *right = merge_lists(lists, mid + 1, high);
+
+    return mergeTwoLists(left, right);
+}
+
+void divide_and_conquer(node_t **list, node_t *lists[], size_t listsSize) {
+    *list = merge_lists(lists, 0, listsSize - 1);
+}
