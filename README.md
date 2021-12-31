@@ -8,7 +8,7 @@
 ## merge
 * interval
 * head-tail
-* priority queue(TODO)
+* divide and conquer
 
 ## Iterative merge sort interface
 
@@ -18,7 +18,7 @@ merge_sort_iter(node_t **list, divide_f divide , merge_f merge)
 
 divide_f: divide list function
 
-merge_f: merge list function
+merge_f: merge lists function
 
 example:
 ```c
